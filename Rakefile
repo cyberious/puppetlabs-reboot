@@ -1,9 +1,9 @@
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-lint/tasks/puppet-lint'
 begin
-    require 'beaker/tasks/test'
+  require 'beaker/tasks/test'
 rescue LoadError
-    puts "Unable to load beaker/tasks/test for rake tasks"
+  puts "Unable to load beaker/tasks/test for rake tasks"
 end
 
 #Due to puppet-lint not ignoring tests folder or the ignore paths attribute
