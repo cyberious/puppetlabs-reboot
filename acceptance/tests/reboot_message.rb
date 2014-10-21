@@ -17,7 +17,7 @@ windows_agents.each do |agent|
   step "Reboot Immediately with a Custom Message"
 
   #Apply the manifest.
-  on agent, puppet('apply', '--debug'), :stdin => reboot_manifest do |result|
+  apply_manifest_on(agent, reboot_manifest, opts) do |result|
     assert_match /shutdown\.exe  \/r \/t 60 \/d p:4:1 \/c \"A different message\"/,
       result.stderr, 'Expected reboot message is incorrect'
   end

@@ -17,9 +17,9 @@ windows_agents.each do |agent|
   step "Reboot Immediately with a Custom Timeout"
 
   #Apply the manifest.
-  on agent, puppet('apply', '--debug'), :stdin => reboot_manifest do |result|
+  apply_manifest_on(agent, reboot_manifest, opts) do |result|
     assert_match /shutdown\.exe  \/r \/t 120 \/d p:4:1/,
-      result.stderr, 'Expected reboot timeout is incorrect'
+                 result.stdout, 'Expected reboot timeout is incorrect'
   end
 
   #Waiting 61 seconds guarantees that the default timeout is different.

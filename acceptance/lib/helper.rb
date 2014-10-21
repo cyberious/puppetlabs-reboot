@@ -5,6 +5,12 @@ module Puppet
       SHUTDOWN_ABORT = 'cmd /c shutdown /a'
       SHUTDOWN_NOT_IN_PROGRESS = 1116 % 256
 
+      FUTURE_PARSER = ENV['FUTURE_PARSER'] == 'true' || false
+
+      def opts
+        {:catch_failures => true, :future_parser => FUTURE_PARSER}
+      end
+
       def ensure_shutdown_not_scheduled(agent)
         sleep 5
 

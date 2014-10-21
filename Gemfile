@@ -33,9 +33,8 @@ group :development, :test do
   if beaker_version
     gem 'beaker', *location_for(beaker_version)
   else
-    gem 'beaker',                :require => false, :platforms => :ruby
+    gem 'beaker','~> 1.18.x',                :require => false, :platforms => :ruby
   end
-  gem 'beaker-rspec',            :require => false
 end
 
 # see http://projects.puppetlabs.com/issues/21698
