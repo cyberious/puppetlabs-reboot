@@ -5,9 +5,9 @@ module Puppet
       SHUTDOWN_ABORT = 'cmd /c shutdown /a'
       SHUTDOWN_NOT_IN_PROGRESS = 1116 % 256
 
-      FUTURE_PARSER = ENV['FUTURE_PARSER'] == 'true' || false
+      FUTURE_PARSER = ENV['FUTURE_PARSER'] == 'true'
 
-      def apply_opts
+      def get_apply_opts
         {:catch_failures => true,
          :future_parser => FUTURE_PARSER}
       end

@@ -16,7 +16,7 @@ windows_agents.each do |agent|
   step "Reboot Immediately (Explicit) with Refresh"
 
   #Apply the manifest.
-  apply_manifest_on(agent, reboot_manifest, apply_opts)
+  apply_manifest_on(agent, reboot_manifest, get_apply_opts)
 
   #Verify that a shutdown has been initiated and clear the pending shutdown.
   retry_shutdown_abort(agent)

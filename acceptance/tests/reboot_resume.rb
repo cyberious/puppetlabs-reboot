@@ -27,12 +27,12 @@ confine :to, :platform => 'windows'
 
 teardown do
   step "Remove Test Artifacts"
-  apply_manifest_on(agent, remove_artifacts, apply_opts)
+  apply_manifest_on(agent, remove_artifacts, get_apply_opts)
 end
 
 windows_agents.each do |agent|
   step "Attempt First Reboot"
-  apply_manifest_on(agent, reboot_manifest, apply_opts) do |result|
+  apply_manifest_on(agent, reboot_manifest, get_apply_opts) do |result|
     assert_match /\[c:\/first.txt\]\/ensure: created/,
       result.stdout, 'Expected file was not created'
   end
@@ -41,7 +41,7 @@ windows_agents.each do |agent|
   retry_shutdown_abort(agent)
 
   step "Resume After Reboot"
-  apply_manifest_on(agent, reboot_manifest, apply_opts) do |result|
+  apply_manifest_on(agent, reboot_manifest, get_apply_opts) do |result|
     assert_match /\[c:\/second.txt\]\/ensure: created/,
       result.stdout, 'Expected file was not created'
   end
@@ -50,7 +50,7 @@ windows_agents.each do |agent|
   retry_shutdown_abort(agent)
 
   step "Verify Manifest is Finished"
-  apply_manifest_on(agent, reboot_manifest, apply_opts)
+  apply_manifest_on(agent, reboot_manifest, get_apply_opts)
 
   #Verify that a shutdown has NOT been initiated.
   ensure_shutdown_not_scheduled(agent)

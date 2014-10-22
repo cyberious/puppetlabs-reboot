@@ -18,7 +18,7 @@ windows_agents.each do |agent|
 
   #Apply the manifest.
   update_default_apply_opts_on(agent)
-  apply_manifest_on(agent, reboot_manifest, apply_opts) do |result|
+  apply_manifest_on(agent, reboot_manifest, get_apply_opts) do |result|
     assert_match /shutdown\.exe\s+\/r\s+\/t\s+60\s+\/d\s+p:4:1\s+\/c\s+\"A different message\"/,
       result.stdout, 'Expected reboot message is incorrect'
   end
