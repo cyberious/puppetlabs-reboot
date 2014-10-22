@@ -23,15 +23,15 @@ confine :to, :platform => 'windows'
 
 teardown do
   step "Undo the Registry Changes for Required Reboot"
-  apply_manifest_on(agent, undo_pending_reboot_manifest, opts)
+  apply_manifest_on(agent, undo_pending_reboot_manifest, apply_opts)
 end
 
 windows_agents.each do |agent|
   step "Declare Reboot Required in the Registry"
-  apply_manifest_on(agent, pending_reboot_manifest, opts)
+  apply_manifest_on(agent, pending_reboot_manifest, apply_opts)
 
   step "Reboot if Pending Reboot Required"
-  apply_manifest_on(agent, reboot_manifest, opts)
+  apply_manifest_on(agent, reboot_manifest, apply_opts)
 
   #Verify that a shutdown has been initiated and clear the pending shutdown.
   retry_shutdown_abort(agent)

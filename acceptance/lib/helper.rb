@@ -7,8 +7,15 @@ module Puppet
 
       FUTURE_PARSER = ENV['FUTURE_PARSER'] == 'true' || false
 
-      def opts
-        {:catch_failures => true, :future_parser => FUTURE_PARSER}
+      def apply_opts
+        {:catch_failures => true,
+         :future_parser => FUTURE_PARSER}
+      end
+
+      def update_default_apply_opts_on(host)
+        host[:default_apply_opts] ||= {}
+        host[:default_apply_opts].merge!(:debug => nil)
+        host[:default_apply_opts].merge!(:parser => 'future') if ENV['FUTURE_PARSER'] == 'true'
       end
 
       def ensure_shutdown_not_scheduled(agent)

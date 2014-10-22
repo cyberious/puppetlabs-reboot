@@ -17,7 +17,8 @@ windows_agents.each do |agent|
   step "Reboot After Finishing Complete Catalog"
 
   #Apply the manifest.
-  apply_manifest_on(agent, reboot_manifest, opts) do |result|
+  update_default_apply_opts_on(agent)
+  apply_manifest_on(agent, reboot_manifest, apply_opts) do |result|
     assert_match /defined 'message' as 'step_2'/,
                  result.stdout, 'Expected step was not finished before reboot'
   end

@@ -17,9 +17,10 @@ windows_agents.each do |agent|
   step "Reboot Immediately with a Custom Message"
 
   #Apply the manifest.
-  apply_manifest_on(agent, reboot_manifest, opts) do |result|
-    assert_match /shutdown\.exe  \/r \/t 60 \/d p:4:1 \/c \"A different message\"/,
-      result.stderr, 'Expected reboot message is incorrect'
+  update_default_apply_opts_on(agent)
+  apply_manifest_on(agent, reboot_manifest, apply_opts) do |result|
+    assert_match /shutdown\.exe\s+\/r\s+\/t\s+60\s+\/d\s+p:4:1\s+\/c\s+\"A different message\"/,
+      result.stdout, 'Expected reboot message is incorrect'
   end
 
   #Verify that a shutdown has been initiated and clear the pending shutdown.

@@ -15,7 +15,7 @@ windows_agents.each do |agent|
   step "Attempt to Reboot Computer without Refresh"
 
   #Apply the manifest.
-  apply_manifest_on(agent, reboot_manifest, opts)
+  apply_manifest_on(agent, reboot_manifest, apply_opts)
 
   #Verify that a shutdown has NOT been initiated because reboot
   #was not refreshed.

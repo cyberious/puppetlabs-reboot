@@ -18,7 +18,7 @@ windows_agents.each do |agent|
   step "Attempt Reboot with a Short Catalog Timeout"
 
   #Apply the manifest.
-  apply_manifest_on(agent, reboot_manifest, opts)
+  apply_manifest_on(agent, reboot_manifest, apply_opts)
 
   #Verify that a shutdown has NOT been initiated.
   ensure_shutdown_not_scheduled(agent)

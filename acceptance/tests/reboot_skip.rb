@@ -16,7 +16,7 @@ windows_agents.each do |agent|
   step "Reboot Immediately with Skipping Other Resources"
 
   #Apply the manifest. Verify that the "step_2" notify is skipped.
-  apply_manifest_on(agent, reboot_manifest, opts) do |result|
+  apply_manifest_on(agent, reboot_manifest, apply_opts) do |result|
     assert_match /Transaction canceled, skipping/,
       result.stdout, 'Expected resource was not skipped'
   end

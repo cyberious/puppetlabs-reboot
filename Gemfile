@@ -23,17 +23,13 @@ group :development, :test do
   gem 'puppetlabs_spec_helper'
   gem 'nokogiri', "~> 1.5.10"
   gem 'mime-types', '<2.0',      :require => false
-  gem 'rspec-puppet',            :require => false
-  gem 'rspec-system',            :require => false
-  gem 'rspec-system-puppet',     :require => false
-  gem 'rspec-system-serverspec', :require => false
   gem 'serverspec',              :require => false
   gem 'puppet-lint',             :require => false
   gem 'simplecov',               :require => false
   if beaker_version
     gem 'beaker', *location_for(beaker_version)
   else
-    gem 'beaker','~> 1.18.x',                :require => false, :platforms => :ruby
+    gem 'beaker','~> 1.20.x',                :require => false, :platforms => :ruby
   end
 end
 
